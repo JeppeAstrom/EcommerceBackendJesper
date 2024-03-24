@@ -3910,19 +3910,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Jesper(Hos Annika)\\.nuget\\packages\\": {}
+    "C:\\Users\\jespe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jesper(Hos Annika)\\Downloads\\okx\\EcommerceBackend.csproj",
+      "projectUniqueName": "C:\\Users\\jespe\\Downloads\\EcommerceBackend\\EcommerceBackend.csproj",
       "projectName": "EcommerceBackend",
-      "projectPath": "C:\\Users\\Jesper(Hos Annika)\\Downloads\\okx\\EcommerceBackend.csproj",
-      "packagesPath": "C:\\Users\\Jesper(Hos Annika)\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jesper(Hos Annika)\\Downloads\\okx\\obj\\",
+      "projectPath": "C:\\Users\\jespe\\Downloads\\EcommerceBackend\\EcommerceBackend.csproj",
+      "packagesPath": "C:\\Users\\jespe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jespe\\Downloads\\EcommerceBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Jesper(Hos Annika)\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jespe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3942,11 +3942,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3991,7 +3986,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
