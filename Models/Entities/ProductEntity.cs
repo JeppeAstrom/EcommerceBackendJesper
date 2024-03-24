@@ -31,7 +31,7 @@ public class ProductEntity
             name = productEntity.Name,
             description = productEntity.Description,
             price = productEntity.Price,
-            Images = productEntity.Images.Select(images => new ImageDto() { Id = images.Id, ImageUrl = images.ImageUrl}).ToList(),
+            Images = productEntity.Images.Select(imageEntity => (ImageDto)imageEntity).ToList(),
             Categories = productEntity.Categories.Select(category => new CategoryDto() { ID = category.ID, Name = category.Name }).ToList(),
             Reviews = productEntity.Reviews.Select(r => new ReviewDto
             {
