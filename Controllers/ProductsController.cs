@@ -21,11 +21,17 @@ namespace examensarbete_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ProductDto>>> GetProducts()
         {
-            List<ProductDto> productEntity = await _context.Products.Include(p => p.Images).Include(p => p.Categories).Select(p => (ProductDto)p).ToListAsync();
+            // Fetch the products and their related Images and Categories from the database
+            var productEntities = await _context.Products
+                .Include(p => p.Images)
+                .Include(p => p.Categories)
+                .ToListAsync();
 
-            return productEntity;
+            // Convert the list of ProductEntities to ProductDtos
+            var productDtos = productEntities.Select(p => (ProductDto)p).ToList();
+
+            return productDtos;
         }
-
         [HttpPost]
         public async Task<ActionResult<ProductEntity>> PostProduct(ProductSchema product)
         {
