@@ -13,6 +13,6 @@ public class DatabaseContext: DbContext
     public DbSet<CategoryEntity> Categories { get; set; }
     public DbSet<ImageEntity> Images { get; set; }
 
-
+ 
 }
 

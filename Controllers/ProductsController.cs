@@ -21,16 +21,9 @@ namespace examensarbete_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ProductDto>>> GetProducts()
         {
-            // Fetch the products and their related Images and Categories from the database
-            var productEntities = await _context.Products
-                .Include(p => p.Images)
-                .Include(p => p.Categories)
-                .ToListAsync();
+            List<ProductDto> productEntity = await _context.Products.Include(p => p.Images).Include(p => p.Categories).Select(p => (ProductDto)p).ToListAsync();
 
-            // Convert the list of ProductEntities to ProductDtos
-            var productDtos = productEntities.Select(p => (ProductDto)p).ToList();
-
-            return productDtos;
+            return productEntity;
         }
 
         [HttpPost]
@@ -49,7 +42,7 @@ namespace examensarbete_backend.Controllers
             {
                 _context.Images.Add(new ImageEntity { Id = Guid.NewGuid(), ImageUrl = imageUrl, Product = entity });
             }
-
+            await _context.SaveChangesAsync();
             return Created("", "");
         }
 

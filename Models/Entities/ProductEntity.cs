@@ -14,7 +14,7 @@ public class ProductEntity
     public string Description { get; set; } = null!;
     [Column(TypeName = "decimal(18,2)")]
     public decimal Price { get; set; }
-    public List<ImageEntity> Images { get; set; } = new List<ImageEntity>();
+    public virtual List<ImageEntity> Images { get; set; } = new List<ImageEntity>();
     // Foreign key
 
  
