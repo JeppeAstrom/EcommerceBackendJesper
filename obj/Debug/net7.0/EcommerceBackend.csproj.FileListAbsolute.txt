@@ -227,3 +227,7 @@ C:\Users\Jesper(Hos Annika)\Downloads\Ny mapp\obj\Debug\net7.0\refint\EcommerceB
 C:\Users\Jesper(Hos Annika)\Downloads\Ny mapp\obj\Debug\net7.0\EcommerceBackend.pdb
 C:\Users\Jesper(Hos Annika)\Downloads\Ny mapp\obj\Debug\net7.0\EcommerceBackend.genruntimeconfig.cache
 C:\Users\Jesper(Hos Annika)\Downloads\Ny mapp\obj\Debug\net7.0\ref\EcommerceBackend.dll
+C:\Users\jespe\Downloads\EcommerceBackend\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\jespe\Downloads\EcommerceBackend\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\jespe\Downloads\EcommerceBackend\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\jespe\Downloads\EcommerceBackend\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
