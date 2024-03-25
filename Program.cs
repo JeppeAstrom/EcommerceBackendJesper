@@ -24,8 +24,11 @@ builder.Services.AddCors(options =>
                    .AllowAnyHeader();
         });
 });
-var app = builder.Build();
 
+builder.Services.AddControllers();
+
+var app = builder.Build();
+builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 app.UseSwagger();
 app.UseSwaggerUI();
