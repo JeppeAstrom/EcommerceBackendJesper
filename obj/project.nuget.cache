@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3nvwWDLW/fYOs53uX95Cr0iFN8AqnTCgnYsSYV70PUc2yVHyWooDftW2VTez63ADOeUmVApaQIi6vHzAbadSDg==",
+  "dgSpecHash": "9iqAf4++1OjjMhGCP9Y23+UdWdYqSbplIlDdg9F8rT50dPuUxYHTVap+bEea2lkaUOHXDEaKh170+0R1PW90SA==",
   "success": true,
   "projectFilePath": "C:\\Users\\jespe\\Downloads\\EcommerceBackend\\EcommerceBackend.csproj",
   "expectedPackageFiles": [
@@ -45,6 +45,7 @@
     "C:\\Users\\jespe\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\jespe\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
