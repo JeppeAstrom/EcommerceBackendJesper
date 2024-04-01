@@ -231,3 +231,4 @@ C:\Users\jespe\Downloads\EcommerceBackend\bin\Debug\net7.0\Microsoft.AspNetCore.
 C:\Users\jespe\Downloads\EcommerceBackend\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\jespe\Downloads\EcommerceBackend\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\jespe\Downloads\EcommerceBackend\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\jespe\Downloads\EcommerceBackend\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

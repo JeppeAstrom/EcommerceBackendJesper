@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "RtHEp67oIUoig60cebPbFc5lr16DokM+I4FOu/WsEzBoEHINFjom2EgWMbtg9KwMD9HcNdhzgC01JOTTShoi7Q==",
+  "dgSpecHash": "idQt3YWEuxaaueU3j3zdr6dKtrpSVR1D+dyJPb0fcy3aqhnPNVzBrBg9it2Xne6N3uwkt7ymkz/Bis27azygUw==",
   "success": true,
   "projectFilePath": "C:\\Users\\jespe\\Downloads\\EcommerceBackend\\EcommerceBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jespe\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\jespe\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.5\\microsoft.aspnetcore.authentication.jwtbearer.7.0.5.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.5\\microsoft.aspnetcore.jsonpatch.7.0.5.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.5\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.5.nupkg.sha512",
     "C:\\Users\\jespe\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.0\\microsoft.aspnetcore.openapi.7.0.0.nupkg.sha512",
