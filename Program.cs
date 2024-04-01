@@ -6,27 +6,27 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-builder.Services.AddAuthentication(x =>
-{
-x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
- x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x =>
-{
-    x.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidIssuer = builder.Configuration.GetSection("TokenValidation").GetValue<string>("Issuer")!,
-        ValidateAudience = true,
-        ValidAudience = builder.Configuration.GetSection("TokenValidation").GetValue<string>("Audience")!,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration.GetSection("TokenValidation").GetValue<string>("SecretKey")!))
-    };
+//builder.Services.AddAuthentication(x =>
+//{
+//x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+// x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(x =>
+//{
+//    x.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidateIssuer = true,
+//        ValidIssuer = builder.Configuration.GetSection("TokenValidation").GetValue<string>("Issuer")!,
+//        ValidateAudience = true,
+//        ValidAudience = builder.Configuration.GetSection("TokenValidation").GetValue<string>("Audience")!,
+//        ValidateLifetime = true,
+//        ValidateIssuerSigningKey = true,
+//        IssuerSigningKey = new SymmetricSecurityKey(
+//            Encoding.UTF8.GetBytes(builder.Configuration.GetSection("TokenValidation").GetValue<string>("SecretKey")!))
+//    };
 
-});
-builder.Services.AddAuthorization();
+//});
+//builder.Services.AddAuthorization();
 
 // Add services to the container.
 builder.Services.AddDbContext<DatabaseContext>(options =>
