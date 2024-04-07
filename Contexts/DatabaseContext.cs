@@ -1,10 +1,11 @@
 ﻿using examensarbete_backend.Models.Entities;
 using Manero_Backend.Models.Auth;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace examensarbete_backend.Contexts;
 
-public class DatabaseContext : DbContext
+public class DatabaseContext : IdentityDbContext<AppUser>
 {
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
@@ -17,6 +18,7 @@ public class DatabaseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<AppUser>(appUser =>
         {
