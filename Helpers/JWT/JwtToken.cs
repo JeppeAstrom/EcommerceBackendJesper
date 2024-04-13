@@ -19,7 +19,7 @@ namespace Manero_Backend.Helpers.JWT;
 public interface IJwtToken
 {
     public bool Verify(string jwt);
-    public Task<string> GenerateToken(AppUser user, bool rememberMe);
+    public Task<string> GenerateToken(AppUser user);
 }
 
 public class JwtToken : IJwtToken
@@ -148,5 +148,8 @@ public class JwtToken : IJwtToken
         }
     }
 
-
+    public Task<string> GenerateToken(AppUser user)
+    {
+        throw new NotImplementedException();
+    }
 }

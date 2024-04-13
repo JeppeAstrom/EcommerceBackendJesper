@@ -1,5 +1,8 @@
 using examensarbete_backend.Contexts;
+using Manero_Backend.Helpers.JWT;
+using Manero_Backend.Helpers.Services;
 using Manero_Backend.Models.Auth;
+using Manero_Backend.Models.Interfaces.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +37,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
-
+builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddScoped<IJwtToken, JwtToken>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(x =>
 {

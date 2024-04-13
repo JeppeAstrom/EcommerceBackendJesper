@@ -18,10 +18,10 @@ public interface IAuthService
     Task<bool> DeleteAsync(Guid id);
     Task<IEnumerable<AppUser>> GetAllAsync();
     public Task<IActionResult> SetPhoneNumberAsync(string userId, string phoneNumber);
-    public Task<IActionResult> ValidatePhoneNumber(string userId, string code);
+
  
 
-    public Task<IActionResult> ValidatePasswordCode(string code);
+  
 
 
 }
