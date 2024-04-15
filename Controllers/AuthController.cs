@@ -1,6 +1,7 @@
 ﻿using EcommerceBackend.Models.Schemas;
 using Manero_Backend.Models.Interfaces.Services;
 using Manero_Backend.Models.Schemas.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,6 +48,13 @@ namespace EcommerceBackend.Controllers
             {
                 return StatusCode(500, e);
             }
+        }
+
+        [HttpGet("validatetoken")]
+        [Authorize]
+        public async Task<IActionResult> ValidateToken()
+        {
+            return NoContent();
         }
     }
 }
