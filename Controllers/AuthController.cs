@@ -1,4 +1,5 @@
-﻿using Manero_Backend.Models.Interfaces.Services;
+﻿using EcommerceBackend.Models.Schemas;
+using Manero_Backend.Models.Interfaces.Services;
 using Manero_Backend.Models.Schemas.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,21 @@ namespace EcommerceBackend.Controllers
                 return await _authService.RegisterAsync(schema);
             }
             catch (Exception e) //Ilogger
+            {
+                return StatusCode(500, e);
+            }
+        }
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginSchema schema)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("");
+
+            try
+            {
+                return await _authService.LoginAsync(schema);
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e);
             }
