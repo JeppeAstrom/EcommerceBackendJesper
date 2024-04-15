@@ -147,9 +147,28 @@ public class JwtToken : IJwtToken
             return false;
         }
     }
-
-    public Task<string> GenerateToken(AppUser user)
+  
+    public async Task<string> GenerateToken(AppUser user)
     {
-        throw new NotImplementedException();
+        var identity = await GenerateClaimsIdentity(user);
+        var expires = DateTime.UtcNow.AddMonths(3);
+
+        //var expires = DateTime.UtcNow.AddSeconds(1);
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var securityTokenDescriptor = new SecurityTokenDescriptor
+        {
+            Issuer = _configuration.GetSection("TokenValidation").GetValue<string>("Issuer")!,
+            Audience = _configuration.GetSection("TokenValidation").GetValue<string>("Audience")!,
+            Subject = identity,
+            Expires = expires,
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(_configuration.GetSection("TokenValidation").GetValue<string>("SecretKey")!)),
+                SecurityAlgorithms.HmacSha512Signature
+            )
+        };
+
+        return tokenHandler.WriteToken(tokenHandler.CreateToken(securityTokenDescriptor));
     }
 }

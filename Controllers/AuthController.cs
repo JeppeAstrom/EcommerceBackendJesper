@@ -29,7 +29,7 @@ namespace EcommerceBackend.Controllers
             }
             catch (Exception e) //Ilogger
             {
-                return StatusCode(500, "");
+                return StatusCode(500, e);
             }
         }
     }
