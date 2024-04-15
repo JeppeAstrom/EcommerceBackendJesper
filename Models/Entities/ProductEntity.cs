@@ -1,4 +1,5 @@
-﻿using examensarbete_backend.Models.Dtos;
+﻿using EcommerceBackend.Models.Entities;
+using examensarbete_backend.Models.Dtos;
 using examensarbete_backend.Models.Dtos.Category;
 using examensarbete_backend.Models.Dtos.Product;
 using examensarbete_backend.Models.Dtos.Reviews;
@@ -16,12 +17,13 @@ public class ProductEntity
     public decimal Price { get; set; }
     public virtual List<ImageEntity> Images { get; set; } = new List<ImageEntity>();
     // Foreign key
-
  
     public List<CategoryEntity> Categories { get; set; } = new List<CategoryEntity>();
   
     public List<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
-
+    public Guid ProductGroupId { get; set; }
+    [ForeignKey("ProductGroupId")]
+    public ProductGroupEntity ProductGroup { get; set; }
 
     public static implicit operator ProductDto(ProductEntity productEntity)
 {
