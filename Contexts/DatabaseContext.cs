@@ -23,10 +23,15 @@ public class DatabaseContext : IdentityDbContext<AppUser>
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<ProductEntity>().HasKey(p => p.ID);
 
-        modelBuilder.Entity<ProductEntity>()
-    .HasOne(p => p.ProductGroup)
-    .WithMany()
-    .HasForeignKey(p => p.ProductGroupId);
+            modelBuilder.Entity<ProductEntity>()
+        .HasOne(p => p.ProductGroup)
+        .WithMany()
+        .HasForeignKey(p => p.ProductGroupId);
+
+        modelBuilder.Entity<SizeEntity>(size =>
+        {
+            size.HasOne(s => s.Product).WithMany(p => p.Sizes).HasForeignKey(s => s.ProductId);
+        });
 
 
         modelBuilder.Entity<AppUser>(appUser =>
@@ -57,6 +62,7 @@ public class DatabaseContext : IdentityDbContext<AppUser>
                 .HasForeignKey(p => p.ProductGroupId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
+    
     } 
     }
 

@@ -49,7 +49,7 @@ namespace examensarbete_backend.Controllers
 
             foreach (var size in product.Sizes)
             {
-                _context.Sizes.Add(new SizeEntity { Id = Guid.NewGuid(), Size = size });
+                _context.Sizes.Add(new SizeEntity { Id = Guid.NewGuid(), Size = size, Product=entity });
             }
 
             await _context.SaveChangesAsync();

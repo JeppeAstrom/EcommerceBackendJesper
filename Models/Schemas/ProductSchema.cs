@@ -12,7 +12,6 @@ public class ProductSchema
     public List<string> ImageUrls { get; set; } = new List<string>();
     public List<string> Sizes { get; set; } = new List<string>();
     public string Color { get; set; }
-
     public Guid ProductGroupId { get; set; }
 
     public static implicit operator ProductEntity(ProductSchema product)
@@ -22,7 +21,8 @@ public class ProductSchema
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,
-            ProductGroupId = product.ProductGroupId
+            ProductGroupId = product.ProductGroupId,
+            Color = product.Color,
         };
     }
 }

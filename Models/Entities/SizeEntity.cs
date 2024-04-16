@@ -8,7 +8,8 @@ public class SizeEntity
 {
     public Guid Id { get; set; } 
     public string Size { get; set; }
-
+    public Guid ProductId { get; set; }
+    public virtual ProductEntity Product { get; set; } = null!;
 
     public static implicit operator SizeDto(SizeEntity entity)
     {
