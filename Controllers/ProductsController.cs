@@ -46,6 +46,12 @@ namespace examensarbete_backend.Controllers
             {
                 _context.Images.Add(new ImageEntity { Id = Guid.NewGuid(), ImageUrl = imageUrl, Product = entity });
             }
+
+            foreach (var size in product.Sizes)
+            {
+                _context.Sizes.Add(new SizeEntity { Id = Guid.NewGuid(), Size = size });
+            }
+
             await _context.SaveChangesAsync();
             return Created("", "");
         }

@@ -12,8 +12,8 @@ using examensarbete_backend.Contexts;
 namespace EcommerceBackend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240416110439_productgroupwtf")]
-    partial class productgroupwtf
+    [Migration("20240416114213_productgroup")]
+    partial class productgroup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -467,7 +467,6 @@ namespace EcommerceBackend.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Color")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
@@ -481,7 +480,7 @@ namespace EcommerceBackend.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("ProductGroupId")
+                    b.Property<Guid?>("ProductGroupId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ID");
@@ -685,8 +684,7 @@ namespace EcommerceBackend.Migrations
                     b.HasOne("EcommerceBackend.Models.Entities.ProductGroupEntity", "ProductGroup")
                         .WithMany("Products")
                         .HasForeignKey("ProductGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("ProductGroup");
                 });

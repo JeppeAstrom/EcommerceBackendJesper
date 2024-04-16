@@ -10,7 +10,7 @@ public class ProductSchema
     public decimal Price { get; set; }
     public Guid CategoryId { get; set; }
     public List<string> ImageUrls { get; set; } = new List<string>();
-    public List<SizeEntity> Sizes { get; set; } = new List<SizeEntity>();
+    public List<string> Sizes { get; set; } = new List<string>();
     public string Color { get; set; }
 
     public Guid ProductGroupId { get; set; }

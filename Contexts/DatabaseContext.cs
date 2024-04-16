@@ -15,11 +15,19 @@ public class DatabaseContext : IdentityDbContext<AppUser>
     public DbSet<ProductEntity> Products { get; set; }
     public DbSet<CategoryEntity> Categories { get; set; }
     public DbSet<ImageEntity> Images { get; set; }
+    public DbSet<SizeEntity> Sizes { get; set; }
     public DbSet<ProductGroupEntity> ProductGroups { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<ProductEntity>().HasKey(p => p.ID);
+
+        modelBuilder.Entity<ProductEntity>()
+    .HasOne(p => p.ProductGroup)
+    .WithMany()
+    .HasForeignKey(p => p.ProductGroupId);
+
 
         modelBuilder.Entity<AppUser>(appUser =>
         {

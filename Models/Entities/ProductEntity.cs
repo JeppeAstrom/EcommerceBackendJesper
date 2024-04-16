@@ -18,14 +18,13 @@ public class ProductEntity
     public decimal Price { get; set; }
     public virtual List<ImageEntity> Images { get; set; } = new List<ImageEntity>();
     public virtual List<SizeEntity> Sizes { get; set; } = new List<SizeEntity>();
-    public string Color { get; set; }
+    public string? Color { get; set; } = null;
 
     public List<CategoryEntity> Categories { get; set; } = new List<CategoryEntity>();
   
     public List<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
-    public Guid ProductGroupId { get; set; }
-    [ForeignKey("ProductGroupId")]
-    public ProductGroupEntity ProductGroup { get; set; }
+    public Guid? ProductGroupId { get; set; }
+    public ProductGroupEntity? ProductGroup { get; set; } = null;
 
     public static implicit operator ProductDto(ProductEntity productEntity)
 {

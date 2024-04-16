@@ -6,17 +6,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EcommerceBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class ProductGroups : Migration
+    public partial class productgroup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<string>(
+                name: "Color",
+                table: "Products",
+                type: "nvarchar(max)",
+                nullable: true);
+
             migrationBuilder.AddColumn<Guid>(
                 name: "ProductGroupId",
                 table: "Products",
                 type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "ProductGroups",
@@ -30,41 +35,28 @@ namespace EcommerceBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Color",
+                name: "SizeEntity",
                 columns: table => new
                 {
-                    ColorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ColorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Size = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductEntityID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Color", x => x.ColorId);
+                    table.PrimaryKey("PK_SizeEntity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Color_ProductGroups_ProductGroupId",
+                        name: "FK_SizeEntity_ProductGroups_ProductGroupId",
                         column: x => x.ProductGroupId,
                         principalTable: "ProductGroups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Size",
-                columns: table => new
-                {
-                    SizeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SizeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Size", x => x.SizeId);
                     table.ForeignKey(
-                        name: "FK_Size_ProductGroups_ProductGroupId",
-                        column: x => x.ProductGroupId,
-                        principalTable: "ProductGroups",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_SizeEntity_Products_ProductEntityID",
+                        column: x => x.ProductEntityID,
+                        principalTable: "Products",
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -73,13 +65,13 @@ namespace EcommerceBackend.Migrations
                 column: "ProductGroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Color_ProductGroupId",
-                table: "Color",
-                column: "ProductGroupId");
+                name: "IX_SizeEntity_ProductEntityID",
+                table: "SizeEntity",
+                column: "ProductEntityID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Size_ProductGroupId",
-                table: "Size",
+                name: "IX_SizeEntity_ProductGroupId",
+                table: "SizeEntity",
                 column: "ProductGroupId");
 
             migrationBuilder.AddForeignKey(
@@ -99,16 +91,17 @@ namespace EcommerceBackend.Migrations
                 table: "Products");
 
             migrationBuilder.DropTable(
-                name: "Color");
-
-            migrationBuilder.DropTable(
-                name: "Size");
+                name: "SizeEntity");
 
             migrationBuilder.DropTable(
                 name: "ProductGroups");
 
             migrationBuilder.DropIndex(
                 name: "IX_Products_ProductGroupId",
+                table: "Products");
+
+            migrationBuilder.DropColumn(
+                name: "Color",
                 table: "Products");
 
             migrationBuilder.DropColumn(

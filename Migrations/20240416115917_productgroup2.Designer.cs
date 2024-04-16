@@ -12,8 +12,8 @@ using examensarbete_backend.Contexts;
 namespace EcommerceBackend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240415215902_productgroup")]
-    partial class productgroup
+    [Migration("20240416115917_productgroup2")]
+    partial class productgroup2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,26 +40,6 @@ namespace EcommerceBackend.Migrations
                     b.ToTable("CategoryEntityProductEntity");
                 });
 
-            modelBuilder.Entity("EcommerceBackend.Models.Entities.Color", b =>
-                {
-                    b.Property<Guid>("ColorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ColorName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ProductGroupId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ColorId");
-
-                    b.HasIndex("ProductGroupId");
-
-                    b.ToTable("Color");
-                });
-
             modelBuilder.Entity("EcommerceBackend.Models.Entities.ProductGroupEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -71,24 +51,29 @@ namespace EcommerceBackend.Migrations
                     b.ToTable("ProductGroups");
                 });
 
-            modelBuilder.Entity("EcommerceBackend.Models.Entities.Size", b =>
+            modelBuilder.Entity("EcommerceBackend.Models.Entities.SizeEntity", b =>
                 {
-                    b.Property<Guid>("SizeId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ProductEntityID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductGroupId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("SizeName")
+                    b.Property<string>("Size")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SizeId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductEntityID");
 
                     b.HasIndex("ProductGroupId");
 
-                    b.ToTable("Size");
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("Manero_Backend.Models.Auth.AppUser", b =>
@@ -481,6 +466,9 @@ namespace EcommerceBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -492,7 +480,7 @@ namespace EcommerceBackend.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("ProductGroupId")
+                    b.Property<Guid?>("ProductGroupId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ID");
@@ -546,21 +534,14 @@ namespace EcommerceBackend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EcommerceBackend.Models.Entities.Color", b =>
+            modelBuilder.Entity("EcommerceBackend.Models.Entities.SizeEntity", b =>
                 {
-                    b.HasOne("EcommerceBackend.Models.Entities.ProductGroupEntity", "ProductGroup")
-                        .WithMany("Colors")
-                        .HasForeignKey("ProductGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductGroup");
-                });
-
-            modelBuilder.Entity("EcommerceBackend.Models.Entities.Size", b =>
-                {
-                    b.HasOne("EcommerceBackend.Models.Entities.ProductGroupEntity", "ProductGroup")
+                    b.HasOne("examensarbete_backend.Models.Entities.ProductEntity", null)
                         .WithMany("Sizes")
+                        .HasForeignKey("ProductEntityID");
+
+                    b.HasOne("EcommerceBackend.Models.Entities.ProductGroupEntity", "ProductGroup")
+                        .WithMany()
                         .HasForeignKey("ProductGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -703,8 +684,7 @@ namespace EcommerceBackend.Migrations
                     b.HasOne("EcommerceBackend.Models.Entities.ProductGroupEntity", "ProductGroup")
                         .WithMany("Products")
                         .HasForeignKey("ProductGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("ProductGroup");
                 });
@@ -730,11 +710,7 @@ namespace EcommerceBackend.Migrations
 
             modelBuilder.Entity("EcommerceBackend.Models.Entities.ProductGroupEntity", b =>
                 {
-                    b.Navigation("Colors");
-
                     b.Navigation("Products");
-
-                    b.Navigation("Sizes");
                 });
 
             modelBuilder.Entity("Manero_Backend.Models.Auth.AppUser", b =>
@@ -766,6 +742,8 @@ namespace EcommerceBackend.Migrations
                     b.Navigation("Images");
 
                     b.Navigation("Reviews");
+
+                    b.Navigation("Sizes");
                 });
 #pragma warning restore 612, 618
         }
