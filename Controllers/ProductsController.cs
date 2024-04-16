@@ -87,7 +87,7 @@ namespace examensarbete_backend.Controllers
         [HttpGet("productGroup/{id}")]
         public async Task<ActionResult<ProductGroupEntity>> GetProductGroup(Guid id)
         {
-            var productGroup = await _context.ProductGroups.Include(pg => pg.Products).Where(pg => pg.Products.Any(p => p.ID == id)).FirstOrDefaultAsync();
+            var productGroup = await _context.ProductGroups.Include(pg => pg.Products).ThenInclude(p => p.Images).Where(pg => pg.Products.Any(p => p.ID == id)).FirstOrDefaultAsync();
             if (productGroup == null)
             {
                 return NotFound();
