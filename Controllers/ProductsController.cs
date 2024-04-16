@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EcommerceBackend.Models.Schemas;
+using EcommerceBackend.Models.Dtos.Product;
+using examensarbete_backend.Models.Dtos.Category;
+
 namespace examensarbete_backend.Controllers
 {
     [Route("api/[controller]")]
@@ -48,7 +51,7 @@ namespace examensarbete_backend.Controllers
         }
 
         [HttpPost("productGroup")]
-        public async Task<ActionResult<ProductGroupEntity>> PostProductGroup(ProductGroupSchema schema)
+        public async Task<ActionResult> PostProductGroup(ProductGroupDto schema)
         {
             if (!ModelState.IsValid)
             {
@@ -57,19 +60,23 @@ namespace examensarbete_backend.Controllers
 
             try
             {
-                ProductGroupEntity newProductGroup = schema;  // Convert schema to entity
-                _context.ProductGroups.Add(newProductGroup);  // Add to context
-                await _context.SaveChangesAsync();            // Save changes
+                var newProductGroup = new ProductGroupEntity
+                {
+                    Id = schema.Id
+                };
 
-                // Return the created product group with a 201 Created status code
+                _context.ProductGroups.Add(newProductGroup);
+                await _context.SaveChangesAsync();
+
                 return CreatedAtAction(nameof(GetProductGroup), new { id = newProductGroup.Id }, newProductGroup);
             }
             catch (Exception ex)
             {
-                // Log the exception and return a 500 Internal Server Error
+             
                 return StatusCode(500, "Internal Server Error: " + ex.Message);
             }
         }
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductGroupEntity>> GetProductGroup(Guid id)

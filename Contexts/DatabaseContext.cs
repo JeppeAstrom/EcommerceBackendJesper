@@ -21,19 +21,6 @@ public class DatabaseContext : IdentityDbContext<AppUser>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Size>().HasKey(s => s.SizeId);
-        modelBuilder.Entity<Color>().HasKey(c => c.ColorId);
-
-        modelBuilder.Entity<ProductGroupEntity>()
-            .HasMany(p => p.Sizes)
-            .WithOne(s => s.ProductGroup)
-            .HasForeignKey(s => s.ProductGroupId);
-
-        modelBuilder.Entity<ProductGroupEntity>()
-            .HasMany(p => p.Colors)
-            .WithOne(c => c.ProductGroup)
-            .HasForeignKey(c => c.ProductGroupId);
-
         modelBuilder.Entity<AppUser>(appUser =>
         {
             appUser.HasMany(au => au.Addresses)

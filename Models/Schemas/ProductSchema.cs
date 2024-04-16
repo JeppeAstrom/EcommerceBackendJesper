@@ -1,4 +1,5 @@
-﻿using examensarbete_backend.Models.Entities;
+﻿using EcommerceBackend.Models.Entities;
+using examensarbete_backend.Models.Entities;
 
 namespace examensarbete_backend.Models.Schemas;
 
@@ -9,6 +10,9 @@ public class ProductSchema
     public decimal Price { get; set; }
     public Guid CategoryId { get; set; }
     public List<string> ImageUrls { get; set; } = new List<string>();
+    public List<SizeEntity> Sizes { get; set; } = new List<SizeEntity>();
+    public string Color { get; set; }
+
     public Guid ProductGroupId { get; set; }
 
     public static implicit operator ProductEntity(ProductSchema product)

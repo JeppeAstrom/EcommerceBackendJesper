@@ -1,4 +1,5 @@
-﻿using EcommerceBackend.Models.Entities;
+﻿using EcommerceBackend.Models.Dtos;
+using EcommerceBackend.Models.Entities;
 using examensarbete_backend.Models.Dtos;
 using examensarbete_backend.Models.Dtos.Category;
 using examensarbete_backend.Models.Dtos.Product;
@@ -16,8 +17,9 @@ public class ProductEntity
     [Column(TypeName = "decimal(18,2)")]
     public decimal Price { get; set; }
     public virtual List<ImageEntity> Images { get; set; } = new List<ImageEntity>();
-    // Foreign key
- 
+    public virtual List<SizeEntity> Sizes { get; set; } = new List<SizeEntity>();
+    public string Color { get; set; }
+
     public List<CategoryEntity> Categories { get; set; } = new List<CategoryEntity>();
   
     public List<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
@@ -34,6 +36,8 @@ public class ProductEntity
             description = productEntity.Description,
             price = productEntity.Price,
             Images = productEntity.Images.Select(imageEntity => (ImageDto)imageEntity).ToList(),
+            Color= productEntity.Color,
+            Sizes = productEntity.Sizes.Select(sizeEntity => (SizeDto)sizeEntity).ToList(),
             Categories = productEntity.Categories.Select(category => new CategoryDto() { ID = category.ID, Name = category.Name }).ToList(),
             Reviews = productEntity.Reviews.Select(r => new ReviewDto
             {
