@@ -4,6 +4,4 @@ public class ColorEntity
 {
     public Guid ColorId { get; set; }
     public string ColorName { get; set; }
-    public Guid ProductGroupId { get; set; }
-    public ProductGroupEntity ProductGroup { get; set; }
 }

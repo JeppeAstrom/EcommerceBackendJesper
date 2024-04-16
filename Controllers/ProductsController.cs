@@ -25,7 +25,7 @@ namespace examensarbete_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ProductDto>>> GetProducts()
         {
-            List<ProductDto> productEntity = await _context.Products.Include(p => p.Images).Include(p => p.Categories).Select(p => (ProductDto)p).ToListAsync();
+            List<ProductDto> productEntity = await _context.Products.Include(p => p.Images).Include(p => p.Sizes).Include(p => p.Categories).Select(p => (ProductDto)p).ToListAsync();
 
             return productEntity;
         }
