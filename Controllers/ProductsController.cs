@@ -85,14 +85,14 @@ namespace examensarbete_backend.Controllers
 
 
         [HttpGet("productGroup/{id}")]
-        public async Task<ActionResult<List<ProductGroupEntity>>> GetProductGroup(Guid id)
+        public async Task<ActionResult<ProductGroupEntity>> GetProductGroup(Guid id)
         {
-            var productGroups = await _context.ProductGroups.Include(pg => pg.Products).Where(pg => pg.Products.Any(p => p.ID == id)).ToListAsync();
-            if (productGroups == null)
+            var productGroup = await _context.ProductGroups.Include(pg => pg.Products).Where(pg => pg.Products.Any(p => p.ID == id)).FirstOrDefaultAsync();
+            if (productGroup == null)
             {
                 return NotFound();
             }
-            return productGroups;
+            return productGroup;
         }
 
         [HttpGet("{categoryName}")]
