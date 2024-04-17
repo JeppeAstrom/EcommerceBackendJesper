@@ -57,8 +57,7 @@ public class ReviewController : ControllerBase
     public async Task<ActionResult<List<ReviewDto>>> GetReviewsFromProduct(Guid id)
     {
         List<ReviewDto> reviews = await _context.Reviews
-                                                  .Where(p => p.ProductId == id)
-                                                  .Include(r => r.Product)
+                                                  .Where(p => p.ProductId == id).Include(a => a.AppUser)
                                                   .Select(r => (ReviewDto)r)
                                                   .ToListAsync();
 

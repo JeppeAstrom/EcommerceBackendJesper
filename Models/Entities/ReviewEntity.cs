@@ -26,6 +26,7 @@ public class ReviewEntity : BaseEntity
            Comment= entity.Comment,
            ProductId = entity.ProductId,
            Product= entity.Product,
+           AppUser= entity.AppUser,
         };
     }
 }
