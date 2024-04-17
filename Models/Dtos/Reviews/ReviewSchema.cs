@@ -1,7 +1,7 @@
 ﻿using examensarbete_backend.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace EcommerceBackend.Models.Schemas;
+namespace EcommerceBackend.Models.Dtos.Reviews;
 
 public class ReviewSchema
 {

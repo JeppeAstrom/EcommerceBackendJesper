@@ -1,5 +1,5 @@
-﻿using EcommerceBackend.Models.Interfaces.Services;
-using EcommerceBackend.Models.Schemas;
+﻿using EcommerceBackend.Models.Dtos.Reviews;
+using EcommerceBackend.Models.Interfaces.Services;
 using examensarbete_backend.Contexts;
 using examensarbete_backend.Models.Dtos.Product;
 using examensarbete_backend.Models.Dtos.Reviews;
@@ -49,7 +49,7 @@ public class ReviewController : ControllerBase
         }
         catch (Exception e) //Ilogger
         {
-            return StatusCode(500, "");
+            return StatusCode(500, e);
         }
     }
 

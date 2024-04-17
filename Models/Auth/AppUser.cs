@@ -1,4 +1,4 @@
-﻿using examensarbete_backend.Models.Entities;
+﻿using EcommerceBackend.Models.Dtos.Reviews;
 using Manero_Backend.Models.Dtos.User;
 using Manero_Backend.Models.Entities;
 using Microsoft.AspNetCore.Identity;

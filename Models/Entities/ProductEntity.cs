@@ -1,4 +1,5 @@
 ﻿using EcommerceBackend.Models.Dtos;
+using EcommerceBackend.Models.Dtos.Reviews;
 using EcommerceBackend.Models.Entities;
 using examensarbete_backend.Models.Dtos;
 using examensarbete_backend.Models.Dtos.Category;

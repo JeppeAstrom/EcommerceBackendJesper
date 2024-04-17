@@ -1,5 +1,4 @@
-﻿using EcommerceBackend.Models.Schemas;
-using examensarbete_backend.Models.Entities;
+﻿using EcommerceBackend.Models.Dtos.Reviews;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceBackend.Models.Interfaces.Services
