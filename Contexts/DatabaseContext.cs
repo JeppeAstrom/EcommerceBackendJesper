@@ -17,6 +17,7 @@ public class DatabaseContext : IdentityDbContext<AppUser>
     public DbSet<ImageEntity> Images { get; set; }
     public DbSet<SizeEntity> Sizes { get; set; }
     public DbSet<ProductGroupEntity> ProductGroups { get; set; }
+    public DbSet<ReviewEntity> Reviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
