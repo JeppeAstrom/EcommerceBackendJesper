@@ -1,4 +1,7 @@
-﻿using Manero_Backend.Models.Auth;
+﻿using examensarbete_backend.Models.Dtos;
+using examensarbete_backend.Models.Dtos.Product;
+using examensarbete_backend.Models.Entities;
+using Manero_Backend.Models.Auth;
 using Manero_Backend.Models.Dtos.Order;
 
 namespace Manero_Backend.Models.Entities
@@ -15,6 +18,8 @@ namespace Manero_Backend.Models.Entities
         public Guid AddressId { get; set; }
         public AddressEntity Address { get; set; }
         public Guid? PromoCodeId { get; set; }
+ 
+        public virtual List<ProductEntity> Products { get; set; }
 
         public decimal TotalPrice { get; set; }
         public string? Comment { get; set; }
@@ -33,7 +38,7 @@ namespace Manero_Backend.Models.Entities
             {
                 OrderId = entity.Id,
                 TotalPrice = entity.TotalPrice,
-                
+                Products = entity.Products.Select(productEntity => (ProductDto)productEntity).ToList(),
             };
         }
 

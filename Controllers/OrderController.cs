@@ -40,6 +40,7 @@ namespace EcommerceBackend.Controllers
                     TotalPrice = schema.TotalPrice,
                     Cancelled = false,
                     CancelledMessage = schema.CancelledMessage,
+                    
                 };
                 _context.Add(orderEntity);
                 await _context.SaveChangesAsync();

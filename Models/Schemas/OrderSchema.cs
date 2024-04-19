@@ -7,4 +7,5 @@ public class OrderSchema
     public decimal TotalPrice { get; set; }
     public bool Cancelled { get; set; }
     public string? CancelledMessage { get; set; }
+    public List<Guid> ProductId { get; set; }
 }
