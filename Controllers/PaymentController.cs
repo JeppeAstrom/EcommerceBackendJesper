@@ -32,8 +32,9 @@ namespace EcommerceBackend.Controllers
                 var paymentDetailEntity = new PaymentDetailEntity
                 {
                     AppUserId = userId,
-                    Cvv = schema.Cvv,
                     CardName = schema.CardName,
+                    CardNumber = schema.CardNumber,
+                    Cvv = schema.Cvv,
                     ExpDate = schema.ExpDate,
                 };
                 _context.Add(paymentDetailEntity);
