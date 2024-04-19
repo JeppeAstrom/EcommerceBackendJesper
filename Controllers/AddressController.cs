@@ -42,7 +42,7 @@ namespace EcommerceBackend.Controllers
                 };
                 _context.Add(AddressEntity);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok(AddressEntity.Id);
 
             }
             catch (Exception e)
