@@ -2,6 +2,7 @@
 using examensarbete_backend.Contexts;
 using Manero_Backend.Helpers.JWT;
 using Manero_Backend.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,8 @@ namespace EcommerceBackend.Controllers
         {
             _context = context;
         }
-
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateAsync(OrderSchema schema)
         {
             if(!ModelState.IsValid)
