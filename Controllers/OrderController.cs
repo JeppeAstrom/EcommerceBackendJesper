@@ -40,7 +40,7 @@ namespace EcommerceBackend.Controllers
                 };
                 _context.Add(orderEntity);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok(orderEntity.Id);
             }
             catch (Exception e) //Ilogger
             {
