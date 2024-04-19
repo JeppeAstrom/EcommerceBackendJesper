@@ -2,6 +2,7 @@
 using EcommerceBackend.Models.Entities;
 using examensarbete_backend.Models.Entities;
 using Manero_Backend.Models.Auth;
+using Manero_Backend.Models.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ public class DatabaseContext : IdentityDbContext<AppUser>
     public DbSet<SizeEntity> Sizes { get; set; }
     public DbSet<ProductGroupEntity> ProductGroups { get; set; }
     public DbSet<ReviewEntity> Reviews { get; set; }
+    public DbSet<AddressEntity> Address { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
