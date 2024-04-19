@@ -21,6 +21,7 @@ public class DatabaseContext : IdentityDbContext<AppUser>
     public DbSet<ProductGroupEntity> ProductGroups { get; set; }
     public DbSet<ReviewEntity> Reviews { get; set; }
     public DbSet<AddressEntity> Address { get; set; }
+    public DbSet<PaymentDetailEntity> PaymentDetails { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
