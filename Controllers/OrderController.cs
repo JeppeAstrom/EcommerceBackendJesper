@@ -32,52 +32,29 @@ namespace EcommerceBackend.Controllers
             try
             {
                 var userId = JwtToken.GetIdFromClaim(HttpContext);
-
-                var orderEntity = new OrderEntity
+                var order = new OrderEntity
                 {
                     AppUserId = userId,
                     PaymentDetailId = schema.PaymentDetailId,
                     AddressId = schema.AddressId,
                     TotalPrice = schema.TotalPrice,
-                    Cancelled = false,
-                    CancelledMessage = schema.CancelledMessage,
+                    OrderProducts = schema.OrderProducts.Select(op => new OrderProductEntity
+                    {
+                        ProductId = op.ProductId,
+                        Size = op.Size
+                    }).ToList()
                 };
 
-                _context.Add(orderEntity);
+                _context.Add(order);
                 await _context.SaveChangesAsync();
-                return Ok(orderEntity.Id);
+                return Ok(order.Id);
             }
             catch (Exception e) //Ilogger
             {
                 return StatusCode(500, e);
             }
         }
-        [HttpPost("postProduct")]
-        [Authorize]
-        public async Task<IActionResult> CreateProductOrder(OrderProductSchema schema)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("");
-            }
-            try
-            {
-                var userId = JwtToken.GetIdFromClaim(HttpContext);
-
-                var orderEntity = new OrderProductEntity
-                {
-                   
-                };
-
-                _context.Add(orderEntity);
-                await _context.SaveChangesAsync();
-                return Ok(orderEntity.Id);
-            }
-            catch (Exception e) //Ilogger
-            {
-                return StatusCode(500, e);
-            }
-        }
+     
 
         [HttpGet("getOrderHistory")]
         [Authorize]
@@ -85,16 +62,18 @@ namespace EcommerceBackend.Controllers
         {
             try
             {
-
-          
             var userId = JwtToken.GetIdFromClaim(HttpContext);
-            // Fetch entities from database
-            List<OrderEntity> orderEntities = await _context.Orders
-                                                            .Where(o => o.AppUserId == userId).Include(p => p.OrderProducts)
-                                                            .ToListAsync();
 
-            // Convert entities to DTOs
-            List<OrderDto> orders = orderEntities.Select(entity => (OrderDto)entity).ToList();
+                var orders = await _context.Orders
+                                         .Where(o => o.AppUserId == userId)
+                                         .Include(o => o.OrderProducts)
+                                         .ThenInclude(op => op.Product).ThenInclude(p => p.Images)
+                                         .ToListAsync();
+
+                if (orders == null || orders.Count == 0)
+                {
+                    return NotFound("No orders found for the specified user.");
+                }
 
             return Ok(orders);
             }
@@ -103,6 +82,6 @@ namespace EcommerceBackend.Controllers
                 return StatusCode(500, e);
             }
         }
-        
+
     }
 }

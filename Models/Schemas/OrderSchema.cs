@@ -11,7 +11,7 @@ public class OrderSchema
     public bool Cancelled { get; set; }
     public decimal TotalPrice { get; set; }
     public string? CancelledMessage { get; set; }
-    public virtual List<OrderProductEntity> OrderProducts{ get; set; }
+    public virtual List<OrderProductSchema> OrderProducts{ get; set; }
 
     public static implicit operator OrderEntity(OrderSchema schema)
     {
@@ -21,6 +21,13 @@ public class OrderSchema
             AddressId = schema.AddressId,
             PromoCodeId = schema.PromoCodeId,
             TotalPrice = schema.TotalPrice,
+            Cancelled = schema.Cancelled,
+            CancelledMessage = schema.CancelledMessage,
+            OrderProducts = schema.OrderProducts.Select(op => new OrderProductEntity
+            {
+                ProductId = op.ProductId,
+                Size = op.Size
+            }).ToList()
         };
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace EcommerceBackend.Models.Schemas;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EcommerceBackend.Models.Schemas;
 
 public class OrderProductSchema
 {

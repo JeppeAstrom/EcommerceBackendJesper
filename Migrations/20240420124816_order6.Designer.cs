@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using examensarbete_backend.Contexts;
 
@@ -11,9 +12,11 @@ using examensarbete_backend.Contexts;
 namespace EcommerceBackend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240420124816_order6")]
+    partial class order6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,11 +106,19 @@ namespace EcommerceBackend.Migrations
             modelBuilder.Entity("EcommerceBackend.Models.Schemas.OrderProductSchema", b =>
                 {
                     b.Property<Guid>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("OrderEntityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Size")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("OrderEntityId");
 
                     b.ToTable("OrderProductSchema");
                 });
@@ -569,6 +580,13 @@ namespace EcommerceBackend.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("EcommerceBackend.Models.Schemas.OrderProductSchema", b =>
+                {
+                    b.HasOne("Manero_Backend.Models.Entities.OrderEntity", null)
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("OrderEntityId");
+                });
+
             modelBuilder.Entity("Manero_Backend.Models.Entities.AddressEntity", b =>
                 {
                     b.HasOne("Manero_Backend.Models.Auth.AppUser", "AppUser")
@@ -610,7 +628,7 @@ namespace EcommerceBackend.Migrations
             modelBuilder.Entity("Manero_Backend.Models.Entities.OrderProductEntity", b =>
                 {
                     b.HasOne("Manero_Backend.Models.Entities.OrderEntity", "Order")
-                        .WithMany("OrderProducts")
+                        .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

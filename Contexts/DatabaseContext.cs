@@ -1,5 +1,6 @@
 ﻿using EcommerceBackend.Models.Dtos.Reviews;
 using EcommerceBackend.Models.Entities;
+using EcommerceBackend.Models.Schemas;
 using examensarbete_backend.Models.Entities;
 using Manero_Backend.Models.Auth;
 using Manero_Backend.Models.Entities;
@@ -23,6 +24,7 @@ public class DatabaseContext : IdentityDbContext<AppUser>
     public DbSet<AddressEntity> Address { get; set; }
     public DbSet<PaymentDetailEntity> PaymentDetails { get; set; }
     public DbSet<OrderEntity> Orders { get; set; }
+    public DbSet<OrderProductEntity> OrderProducts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -34,11 +36,22 @@ public class DatabaseContext : IdentityDbContext<AppUser>
         .WithMany()
         .HasForeignKey(p => p.ProductGroupId);
 
+        modelBuilder.Entity<OrderEntity>(entity =>
+        {
+            entity.HasMany(e => e.OrderProducts)
+                  .WithOne(op => op.Order)
+                  .HasForeignKey(op => op.OrderId);
+        });
+
         modelBuilder.Entity<SizeEntity>(size =>
         {
             size.HasOne(s => s.Product).WithMany(p => p.Sizes).HasForeignKey(s => s.ProductId);
         });
-
+      
+        modelBuilder.Entity<OrderProductSchema>(entity =>
+        {
+            entity.HasNoKey();
+        });
 
         modelBuilder.Entity<AppUser>(appUser =>
         {

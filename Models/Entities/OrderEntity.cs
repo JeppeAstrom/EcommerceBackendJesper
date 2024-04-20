@@ -1,4 +1,5 @@
-﻿using examensarbete_backend.Models.Dtos;
+﻿using EcommerceBackend.Models.Schemas;
+using examensarbete_backend.Models.Dtos;
 using examensarbete_backend.Models.Dtos.Product;
 using examensarbete_backend.Models.Entities;
 using Manero_Backend.Models.Auth;
