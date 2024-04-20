@@ -18,8 +18,7 @@ namespace Manero_Backend.Models.Entities
         public Guid AddressId { get; set; }
         public AddressEntity Address { get; set; }
         public Guid? PromoCodeId { get; set; }
- 
-        public virtual List<ProductEntity> Products { get; set; }
+        public string? ChosenSize { get; set; }
 
         public decimal TotalPrice { get; set; }
         public string? Comment { get; set; }
@@ -28,7 +27,7 @@ namespace Manero_Backend.Models.Entities
         public string? CancelledMessage { get; set; }
 
          
-        public ICollection<OrderProductEntity> OrderProducts { get; set; } //M:M
+        public virtual List<OrderProductEntity> OrderProducts { get; set; } //M:M
 
         
 
@@ -38,7 +37,7 @@ namespace Manero_Backend.Models.Entities
             {
                 OrderId = entity.Id,
                 TotalPrice = entity.TotalPrice,
-                Products = entity.Products.Select(productEntity => (ProductDto)productEntity).ToList(),
+                
             };
         }
 

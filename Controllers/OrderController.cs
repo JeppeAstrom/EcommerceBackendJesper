@@ -1,6 +1,7 @@
 ﻿using EcommerceBackend.Models.Schemas;
 using examensarbete_backend.Contexts;
 using examensarbete_backend.Models.Dtos.Product;
+using examensarbete_backend.Models.Entities;
 using Manero_Backend.Helpers.JWT;
 using Manero_Backend.Models.Dtos.Order;
 using Manero_Backend.Models.Entities;
@@ -40,8 +41,8 @@ namespace EcommerceBackend.Controllers
                     TotalPrice = schema.TotalPrice,
                     Cancelled = false,
                     CancelledMessage = schema.CancelledMessage,
-                    
                 };
+
                 _context.Add(orderEntity);
                 await _context.SaveChangesAsync();
                 return Ok(orderEntity.Id);
@@ -51,6 +52,33 @@ namespace EcommerceBackend.Controllers
                 return StatusCode(500, e);
             }
         }
+        [HttpPost("postProduct")]
+        [Authorize]
+        public async Task<IActionResult> CreateProductOrder(OrderProductSchema schema)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("");
+            }
+            try
+            {
+                var userId = JwtToken.GetIdFromClaim(HttpContext);
+
+                var orderEntity = new OrderProductEntity
+                {
+                   
+                };
+
+                _context.Add(orderEntity);
+                await _context.SaveChangesAsync();
+                return Ok(orderEntity.Id);
+            }
+            catch (Exception e) //Ilogger
+            {
+                return StatusCode(500, e);
+            }
+        }
+
         [HttpGet("getOrderHistory")]
         [Authorize]
         public async Task<ActionResult<List<OrderDto>>> GetOrders()
@@ -62,7 +90,7 @@ namespace EcommerceBackend.Controllers
             var userId = JwtToken.GetIdFromClaim(HttpContext);
             // Fetch entities from database
             List<OrderEntity> orderEntities = await _context.Orders
-                                                            .Where(o => o.AppUserId == userId)
+                                                            .Where(o => o.AppUserId == userId).Include(p => p.OrderProducts)
                                                             .ToListAsync();
 
             // Convert entities to DTOs

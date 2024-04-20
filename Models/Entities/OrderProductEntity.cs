@@ -1,4 +1,5 @@
-﻿using examensarbete_backend.Models.Entities;
+﻿using EcommerceBackend.Models.Entities;
+using examensarbete_backend.Models.Entities;
 
 namespace Manero_Backend.Models.Entities
 {
@@ -9,7 +10,6 @@ namespace Manero_Backend.Models.Entities
 
         public Guid ProductId { get; set; }
         public ProductEntity Product { get; set; }
-
-
+        public string? Size { get; set; }
     }
 }
