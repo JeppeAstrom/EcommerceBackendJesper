@@ -27,7 +27,9 @@ public class OrderSchema
             {
                 ProductId = op.ProductId,
                 Size = op.Size
-            }).ToList()
+            }).ToList(),
+            Created = DateTime.Now.ToString("yyyy-MM-dd")
+
         };
     }
 }
