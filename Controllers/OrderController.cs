@@ -43,7 +43,7 @@ namespace EcommerceBackend.Controllers
                         ProductId = op.ProductId,
                         Size = op.Size
                     }).ToList(),
-                    Created = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
+                    Created = DateTime.Now.ToString("yyyy-MM-dd")
             };
 
                 _context.Add(order);

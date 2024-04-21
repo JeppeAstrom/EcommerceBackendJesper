@@ -26,7 +26,7 @@ namespace Manero_Backend.Models.Entities
 
         public bool Cancelled { get; set; }
         public string? CancelledMessage { get; set; }
-        public DateTime? Created { get; set; }
+        public string? Created { get; set; }
 
          
         public virtual List<OrderProductEntity> OrderProducts { get; set; } //M:M
