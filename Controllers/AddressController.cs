@@ -1,10 +1,14 @@
-﻿using EcommerceBackend.Models.Schemas;
+﻿using EcommerceBackend.Models.Entities;
+using EcommerceBackend.Models.Schemas;
 using examensarbete_backend.Contexts;
+using examensarbete_backend.Models.Dtos.Product;
 using Manero_Backend.Helpers.JWT;
+using Manero_Backend.Models.Dtos.Address;
 using Manero_Backend.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceBackend.Controllers
 {
@@ -49,6 +53,17 @@ namespace EcommerceBackend.Controllers
             {
                 return StatusCode(500, e);
             }
+        }
+        [HttpGet("address")]
+        public async Task<ActionResult<AddressDto>> GetAddressId()
+        {
+            var userId = JwtToken.GetIdFromClaim(HttpContext);
+            AddressDto address = await _context.Address.Where(a => a.AppUserId == userId).FirstOrDefaultAsync();
+            if (address == null)
+            {
+                return NotFound();
+            }
+            return address;
         }
     }
 }
