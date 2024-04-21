@@ -42,8 +42,9 @@ namespace EcommerceBackend.Controllers
                     {
                         ProductId = op.ProductId,
                         Size = op.Size
-                    }).ToList()
-                };
+                    }).ToList(),
+                    Created = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
+            };
 
                 _context.Add(order);
                 await _context.SaveChangesAsync();
