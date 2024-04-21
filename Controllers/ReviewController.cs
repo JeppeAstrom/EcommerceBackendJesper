@@ -1,4 +1,6 @@
-﻿using EcommerceBackend.Models.Dtos.Reviews;
+﻿using EcommerceBackend.Models.Dtos.Product;
+using EcommerceBackend.Models.Dtos.Reviews;
+using EcommerceBackend.Models.Entities;
 using EcommerceBackend.Models.Interfaces.Services;
 using examensarbete_backend.Contexts;
 using examensarbete_backend.Models.Dtos.Product;
@@ -52,6 +54,39 @@ public class ReviewController : ControllerBase
             return StatusCode(500, e);
         }
     }
+
+    [HttpPost("postReview")]
+    public async Task<ActionResult> PostProductGroup(CreateReviewDto schema)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var userId = JwtToken.GetIdFromClaim(HttpContext);
+
+        try
+        {
+            var review = new ReviewEntity
+            {
+                Comment = schema.Comment,
+                Rating = schema.Rating,
+                ProductId =schema.ProductId,
+                AppUserId= userId,
+            };
+
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+
+            return StatusCode(500, "Internal Server Error: " + ex.Message);
+        }
+    }
+
 
     [HttpGet("review/{id}")]
     public async Task<ActionResult<List<ReviewDto>>> GetReviewsFromProduct(Guid id)
