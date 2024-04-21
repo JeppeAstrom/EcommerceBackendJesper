@@ -10,6 +10,6 @@ namespace Manero_Backend.Models.Entities
 
         public Guid ProductId { get; set; }
         public ProductEntity Product { get; set; }
-        public string? Size { get; set; }
+        public string? Size { get; set; } = null;
     }
 }

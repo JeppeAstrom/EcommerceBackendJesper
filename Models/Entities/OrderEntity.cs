@@ -19,7 +19,6 @@ namespace Manero_Backend.Models.Entities
         public Guid AddressId { get; set; }
         public AddressEntity Address { get; set; }
         public Guid? PromoCodeId { get; set; }
-        public string? ChosenSize { get; set; }
 
         public decimal TotalPrice { get; set; }
         public string? Comment { get; set; }
@@ -39,7 +38,6 @@ namespace Manero_Backend.Models.Entities
             {
                 OrderId = entity.Id,
                 TotalPrice = entity.TotalPrice,
-                
             };
         }
 
