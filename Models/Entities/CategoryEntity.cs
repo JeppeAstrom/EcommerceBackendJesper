@@ -1,4 +1,6 @@
-﻿using examensarbete_backend.Models.Dtos.Category;
+﻿using EcommerceBackend.Enum;
+using examensarbete_backend.Models.Dtos.Category;
+using System.Runtime.CompilerServices;
 
 namespace examensarbete_backend.Models.Entities;
 
@@ -6,16 +8,9 @@ public class CategoryEntity
 {
     public Guid ID { get; set; } 
     public string Name { get; set; } 
-    public List<ProductEntity> Products { get; set; }
-
-    public static implicit operator CategoryDto(CategoryEntity category)
-    {
-        return new CategoryDto
-        {
-            ID = category.ID,
-            Name = category.Name,
-        };
-    }
-
+    public GenderEnum GenderType { get; set; }
+    public Guid ParentCategoryId { get; set; }
+    public virtual List<CategoryEntity> ChildCategories { get; set; } = new List<CategoryEntity>();
+    public virtual List<ProductEntity> Products { get; set; } = new List<ProductEntity>();
 }
 

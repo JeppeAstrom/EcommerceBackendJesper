@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using examensarbete_backend.Contexts;
 
@@ -11,9 +12,11 @@ using examensarbete_backend.Contexts;
 namespace EcommerceBackend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240422115914_subcategories")]
+    partial class subcategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -469,22 +472,16 @@ namespace EcommerceBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CategoryEntityID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("GenderType")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ParentCategoryId")
+                    b.Property<Guid?>("ParentCategoryID")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CategoryEntityID");
+                    b.HasIndex("ParentCategoryID");
 
                     b.ToTable("Categories");
                 });
@@ -701,9 +698,11 @@ namespace EcommerceBackend.Migrations
 
             modelBuilder.Entity("examensarbete_backend.Models.Entities.CategoryEntity", b =>
                 {
-                    b.HasOne("examensarbete_backend.Models.Entities.CategoryEntity", null)
+                    b.HasOne("examensarbete_backend.Models.Entities.CategoryEntity", "ParentCategory")
                         .WithMany("ChildCategories")
-                        .HasForeignKey("CategoryEntityID");
+                        .HasForeignKey("ParentCategoryID");
+
+                    b.Navigation("ParentCategory");
                 });
 
             modelBuilder.Entity("examensarbete_backend.Models.Entities.ImageEntity", b =>
