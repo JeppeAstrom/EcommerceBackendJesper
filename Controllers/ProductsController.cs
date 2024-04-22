@@ -109,5 +109,6 @@ namespace examensarbete_backend.Controllers
 
             return productEntity != null ? productEntity : NotFound();
         }
+
     }
 }

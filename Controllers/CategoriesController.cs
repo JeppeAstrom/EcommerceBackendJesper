@@ -47,6 +47,29 @@ namespace examensarbete_backend.Controllers
             return await _context.Categories.Where(c => c.ParentCategoryId == Guid.Empty).ToListAsync();
         }
 
+        [HttpGet("childCategoriesFromName")]
+        public async Task<ActionResult<CategoryDto>> GetCategoriesFromName(string name)
+        {
+            var mainCategory = await _context.Categories.Where(c => c.ParentCategoryId == Guid.Empty && c.Name == name).FirstOrDefaultAsync();
+            
+            if(mainCategory is null)
+            {
+                return BadRequest("Could not find category");
+            }
+
+            var subCategories = await _context.Categories.Where(c => c.ParentCategoryId == mainCategory.ID).ToListAsync();
+
+            var newCategory = new CategoryDto()
+            {
+                ID = mainCategory.ID,
+                Name = mainCategory.Name,
+                ParentCategory = null,
+                ChildCategories = subCategories.Select(c => new ChildCategoryDto() { Id = c.ID, Name = c.Name }).ToList()
+            };
+
+            return newCategory;
+        }
+
         [HttpGet("childCategories")]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesFromName()
         {
@@ -76,17 +99,10 @@ namespace examensarbete_backend.Controllers
                         newCategory.ChildCategories.Add(subCategoryDto);
 
                     }
-
                 }
                 List.Add(newCategory);
-               
             }
             return List;
-
-
         }
-
-
-
     }
 }
