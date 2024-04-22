@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using EcommerceBackend.Models.Schemas;
 using EcommerceBackend.Models.Dtos.Product;
 using examensarbete_backend.Models.Dtos.Category;
+using EcommerceBackend.Enum;
 
 namespace examensarbete_backend.Controllers
 {
@@ -96,9 +97,9 @@ namespace examensarbete_backend.Controllers
         }
 
         [HttpGet("{categoryName}")]
-        public async Task<ActionResult<List<ProductDto>>> GetProductsByCategory(string categoryName)
+        public async Task<ActionResult<List<ProductDto>>> GetProductsByCategory(string categoryName, GenderEnum genderType)
         {
-            List<ProductDto> productEntity = await _context.Products.Include(p => p.Images).Include(p => p.Categories).Where(p => p.Categories.Any(c => c.Name == categoryName)).Select(p => (ProductDto)p).ToListAsync();
+            List<ProductDto> productEntity = await _context.Products.Include(p => p.Images).Include(p => p.Categories).Where(p => p.Categories.Any(c => c.Name == categoryName && c.GenderType == genderType)).Select(p => (ProductDto)p).ToListAsync();
 
             return productEntity;
         }
