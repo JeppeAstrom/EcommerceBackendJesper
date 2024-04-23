@@ -5,5 +5,6 @@
         Unisex,
         Male,
         Female,
+        Kids
     }
 }
