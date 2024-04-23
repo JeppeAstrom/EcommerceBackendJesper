@@ -1,4 +1,5 @@
-﻿using EcommerceBackend.Models.Dtos;
+﻿using EcommerceBackend.Enum;
+using EcommerceBackend.Models.Dtos;
 using EcommerceBackend.Models.Dtos.Reviews;
 using EcommerceBackend.Models.Entities;
 using examensarbete_backend.Models.Dtos;
@@ -26,6 +27,7 @@ public class ProductEntity
     public List<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
     public Guid? ProductGroupId { get; set; }
     public ProductGroupEntity? ProductGroup { get; set; } = null;
+    public GenderEnum? genderType { get; set; }
 
     public static implicit operator ProductDto(ProductEntity productEntity)
 {
@@ -41,7 +43,9 @@ public class ProductEntity
             Categories = productEntity.Categories.Select(category => new CategoryDto() { ID = category.ID, Name = category.Name }).ToList(),
             Reviews = productEntity.Reviews.Select(r => new ReviewDto
             {
-            }).ToList()
+            }).ToList(),
+            genderType = productEntity.genderType
+            
         };
     }
 }

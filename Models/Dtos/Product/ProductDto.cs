@@ -1,4 +1,5 @@
-﻿using EcommerceBackend.Models.Dtos;
+﻿using EcommerceBackend.Enum;
+using EcommerceBackend.Models.Dtos;
 using EcommerceBackend.Models.Entities;
 using examensarbete_backend.Models.Dtos.Category;
 using examensarbete_backend.Models.Dtos.Reviews;
@@ -18,4 +19,5 @@ public class ProductDto
     public decimal price { get; set; }
     public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
     public List<ReviewDto> Reviews { get; set; } = new List<ReviewDto>();
+    public GenderEnum? genderType { get; set; }
 }
