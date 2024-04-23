@@ -1,4 +1,5 @@
-﻿using EcommerceBackend.Models.Dtos.Category;
+﻿using EcommerceBackend.Enum;
+using EcommerceBackend.Models.Dtos.Category;
 using examensarbete_backend.Models.Entities;
 
 namespace examensarbete_backend.Models.Dtos.Category;

@@ -64,7 +64,7 @@ namespace examensarbete_backend.Controllers
                 ID = mainCategory.ID,
                 Name = mainCategory.Name,
                 ParentCategory = null,
-                ChildCategories = subCategories.Select(c => new ChildCategoryDto() { Id = c.ID, Name = c.Name }).ToList()
+                ChildCategories = subCategories.Select(c => new ChildCategoryDto() { Id = c.ID, Name = c.Name }).ToList(),
             };
 
             return newCategory;
