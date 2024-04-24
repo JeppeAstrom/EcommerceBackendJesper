@@ -20,4 +20,5 @@ public class ProductDto
     public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
     public List<ReviewDto> Reviews { get; set; } = new List<ReviewDto>();
     public GenderEnum? genderType { get; set; }
+    public string ParentCategory { get; set; }
 }

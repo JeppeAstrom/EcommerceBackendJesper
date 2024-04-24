@@ -1,4 +1,5 @@
-﻿using EcommerceBackend.Models.Entities;
+﻿using EcommerceBackend.Enum;
+using EcommerceBackend.Models.Entities;
 using examensarbete_backend.Models.Entities;
 
 namespace examensarbete_backend.Models.Schemas;
@@ -13,6 +14,8 @@ public class ProductSchema
     public List<string> Sizes { get; set; } = new List<string>();
     public string Color { get; set; }
     public Guid ProductGroupId { get; set; }
+    public GenderEnum GenderType { get; set; }
+    public string ParentCategory {get; set; }
 
     public static implicit operator ProductEntity(ProductSchema product)
     {
@@ -23,6 +26,8 @@ public class ProductSchema
             Price = product.Price,
             ProductGroupId = product.ProductGroupId,
             Color = product.Color,
+            genderType= product.GenderType,
+            ParentCategory = product.ParentCategory
         };
     }
 }

@@ -23,11 +23,12 @@ public class ProductEntity
     public string? Color { get; set; } = null;
 
     public List<CategoryEntity> Categories { get; set; } = new List<CategoryEntity>();
-  
+
     public List<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
     public Guid? ProductGroupId { get; set; }
     public ProductGroupEntity? ProductGroup { get; set; } = null;
     public GenderEnum? genderType { get; set; }
+    public string ParentCategory { get; set; }
 
     public static implicit operator ProductDto(ProductEntity productEntity)
 {
@@ -44,8 +45,8 @@ public class ProductEntity
             Reviews = productEntity.Reviews.Select(r => new ReviewDto
             {
             }).ToList(),
-            genderType = productEntity.genderType
-            
+            genderType = productEntity.genderType,
+            ParentCategory= productEntity.ParentCategory,
         };
     }
 }

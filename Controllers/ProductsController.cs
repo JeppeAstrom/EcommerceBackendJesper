@@ -106,7 +106,14 @@ namespace examensarbete_backend.Controllers
         [HttpGet("{categoryName}")]
         public async Task<ActionResult<List<ProductDto>>> GetProductsByCategory(string categoryName, GenderEnum genderType)
         {
-            List<ProductDto> productEntity = await _context.Products.Include(p => p.Sizes).Include(p => p.Images).Include(p => p.Categories).Where(p => p.Categories.Any(c => c.Name == categoryName && c.GenderType == genderType)).Select(p => (ProductDto)p).ToListAsync();
+            List<ProductDto> productEntity = await _context.Products
+      .Include(p => p.Sizes)
+      .Include(p => p.Images)
+      .Include(p => p.Categories)
+      .Where(p => p.Categories.Any(c => c.Name == categoryName && c.GenderType == genderType) || p.ParentCategory == categoryName)
+      .Select(p => (ProductDto)p)
+      .ToListAsync();
+
 
             return productEntity;
         }
