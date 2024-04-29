@@ -12,6 +12,7 @@ public class ProductDto
     public Guid ID { get; set; }
     public string name { get; set; } = null!;
     public string description { get; set; } = null!;
+    public string? chosenSize { get; set; }
 
     public List<ImageDto> Images { get; set; } = new List<ImageDto>();
     public List<SizeDto> Sizes { get; set; } = new List<SizeDto>();

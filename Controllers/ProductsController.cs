@@ -36,6 +36,7 @@ namespace examensarbete_backend.Controllers
         {
             var categories = await _context.Categories.Include(c => c.Products).FirstOrDefaultAsync(c => c.ID == product.CategoryId);
             ProductEntity entity = product;
+            entity.ChosenSize = product.Sizes[0];
             if (categories is not null)
             {
                 entity.Categories.Add(categories);

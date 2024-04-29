@@ -6,7 +6,6 @@ using examensarbete_backend.Models.Dtos;
 using examensarbete_backend.Models.Dtos.Category;
 using examensarbete_backend.Models.Dtos.Product;
 using examensarbete_backend.Models.Dtos.Reviews;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace examensarbete_backend.Models.Entities;
@@ -21,7 +20,7 @@ public class ProductEntity
     public virtual List<ImageEntity> Images { get; set; } = new List<ImageEntity>();
     public virtual List<SizeEntity> Sizes { get; set; } = new List<SizeEntity>();
     public string? Color { get; set; } = null;
-
+    public string? ChosenSize { get; set; } = null!;
     public List<CategoryEntity> Categories { get; set; } = new List<CategoryEntity>();
 
     public List<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
@@ -47,6 +46,7 @@ public class ProductEntity
             }).ToList(),
             genderType = productEntity.genderType,
             ParentCategory= productEntity.ParentCategory,
+            chosenSize = productEntity.ChosenSize,
         };
     }
 }
