@@ -30,14 +30,14 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAnyOrigin",
         builder =>
         {
-            builder.AllowAnyOrigin()  
+            builder.AllowAnyOrigin()
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
 });
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtToken, JwtToken>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(x =>

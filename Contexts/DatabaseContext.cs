@@ -1,4 +1,5 @@
-﻿using EcommerceBackend.Models.Dtos.Reviews;
+﻿using EcommerceBackend.Models.Cart;
+using EcommerceBackend.Models.Dtos.Reviews;
 using EcommerceBackend.Models.Entities;
 using EcommerceBackend.Models.Schemas;
 using examensarbete_backend.Models.Entities;
@@ -25,6 +26,9 @@ public class DatabaseContext : IdentityDbContext<AppUser>
     public DbSet<PaymentDetailEntity> PaymentDetails { get; set; }
     public DbSet<OrderEntity> Orders { get; set; }
     public DbSet<OrderProductEntity> OrderProducts { get; set; }
+
+    public DbSet<CartEntity> Carts { get; set; }
+    public DbSet<CartItemEntity> CartItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
