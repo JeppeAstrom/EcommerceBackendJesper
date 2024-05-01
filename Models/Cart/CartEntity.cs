@@ -8,4 +8,5 @@ public class CartEntity
     public string AppUserId { get; set; } = null!;
     public AppUser AppUser { get; set; }
     public virtual List<CartItemEntity> Items {get; set;}
+
 }
