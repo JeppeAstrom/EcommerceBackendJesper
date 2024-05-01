@@ -47,8 +47,8 @@ namespace EcommerceBackend.Controllers
                     ChosenSize = schema.ChosenSize,
                     Quantity = 1,
                     ImageUrl = schema.ImageUrl,
-                    ProductName = schema.ProductName,
-                    ProductDescription = schema.ProductDescription,
+                    Name = schema.Name,
+                    Description = schema.Description,
                     Price = schema.Price,
                 };
 
@@ -129,8 +129,8 @@ namespace EcommerceBackend.Controllers
             {
                 Id = item.Id,
                 CartId = item.CartId,
-                ProductName = item.ProductName,
-                ProductDescription = item.ProductDescription,
+                Name = item.Name,
+                Description = item.Description,
                 ImageUrl = item.ImageUrl,
                 ProductId = item.ProductId,
                 ChosenSize = item.ChosenSize,

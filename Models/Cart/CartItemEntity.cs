@@ -6,8 +6,8 @@ namespace EcommerceBackend.Models.Cart;
     {
         public Guid Id { get; set; }
         public Guid CartId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public string ImageUrl { get; set; }
         public virtual CartEntity Cart { get; set; }
         public Guid ProductId { get; set; }
