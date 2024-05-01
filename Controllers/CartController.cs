@@ -31,16 +31,19 @@ namespace EcommerceBackend.Controllers
                 _context.Carts.Add(cart);
                 await _context.SaveChangesAsync();
             }
+
+            CartItemEntity cartItem;
             var existingCartItem = _context.CartItems
                 .FirstOrDefault(ci => ci.CartId == cart.Id && ci.ProductId == schema.ProductId && ci.ChosenSize == schema.ChosenSize);
 
             if (existingCartItem != null)
             {
                 existingCartItem.Quantity += 1;
+                cartItem = existingCartItem; 
             }
             else
             {
-                var cartItem = new CartItemEntity
+                cartItem = new CartItemEntity
                 {
                     CartId = cart.Id,
                     ProductId = schema.ProductId,
@@ -57,8 +60,9 @@ namespace EcommerceBackend.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(cartItem.Id);
         }
+
 
         [HttpDelete("DecreaseItem")]
         [Authorize]
