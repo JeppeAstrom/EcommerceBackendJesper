@@ -25,14 +25,14 @@ namespace EcommerceBackend.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> PostFavourite(Guid productId)
+        public async Task<IActionResult> ToggleFavourite(Guid productId)
         {
             var userId = JwtToken.GetIdFromClaim(HttpContext);
 
             var favourites = await _context.Favourites
-                                .Include(f => f.FavouriteProducts)
-                                .ThenInclude(fp => fp.Product)
-                                .FirstOrDefaultAsync(c => c.AppUserId == userId);
+                                   .Include(f => f.FavouriteProducts)
+                                   .ThenInclude(fp => fp.Product)
+                                   .FirstOrDefaultAsync(c => c.AppUserId == userId);
 
             if (favourites == null)
             {
@@ -47,16 +47,23 @@ namespace EcommerceBackend.Controllers
                 return NotFound("Product not found.");
             }
 
-            if (!favourites.FavouriteProducts.Any(fp => fp.Product.ID == productId))
+            var favouriteProduct = favourites.FavouriteProducts.FirstOrDefault(fp => fp.Product.ID == productId);
+            if (favouriteProduct != null)
             {
-                var favouriteProduct = new FavouriteProductEntity { Product = product };
+                _context.FavouriteProduct.Remove(favouriteProduct);
+                await _context.SaveChangesAsync();
+                return Ok("Favorite product removed.");
+            }
+
+            else
+            {
+                favouriteProduct = new FavouriteProductEntity { Product = product };
                 favourites.FavouriteProducts.Add(favouriteProduct);
                 await _context.SaveChangesAsync();
                 return Ok("Product added to favorites.");
             }
-
-            return BadRequest("Product already in favorites");
         }
+
 
         [HttpGet]
         [Authorize]
