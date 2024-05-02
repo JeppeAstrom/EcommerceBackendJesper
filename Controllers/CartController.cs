@@ -113,6 +113,29 @@ namespace EcommerceBackend.Controllers
             return Ok(cartItem);
 
         }
+
+        [HttpDelete("ResetCart")]
+        [Authorize]
+        public async Task<IActionResult> RemoveFromCart()
+        {
+            var userId = JwtToken.GetIdFromClaim(HttpContext);
+
+            var carts = await _context.Carts.Include(c => c.Items).Where(c => c.AppUserId == userId).ToListAsync();
+            if (carts == null || !carts.Any())
+            {
+                return NotFound("No cart found for the specified user.");
+            }
+
+            foreach (var cart in carts)
+            {
+                _context.CartItems.RemoveRange(cart.Items);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok("All items removed from cart.");
+        }
+
         [HttpGet]
         public async Task<ActionResult<CartDto>> GetCart()
         {
@@ -140,7 +163,7 @@ namespace EcommerceBackend.Controllers
                 ChosenSize = item.ChosenSize,
                 Quantity = item.Quantity,
                 Price = item.Price,
-                TotalPrice = item.Quantity * item.Price
+                TotalPrice = item.Quantity * item.Price,
             }).ToList();
 
             var cartDto = new CartDto
