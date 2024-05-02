@@ -72,16 +72,16 @@ namespace EcommerceBackend.Controllers
             var userId = JwtToken.GetIdFromClaim(HttpContext);
 
             var favourites = await _context.Favourites
-                                           .Include(f => f.FavouriteProducts)
-                                               .ThenInclude(fp => fp.Product)
-                                                   .ThenInclude(p => p.Images) 
-                                           .Include(f => f.FavouriteProducts)
-                                               .ThenInclude(fp => fp.Product)
-                                                   .ThenInclude(p => p.Sizes)  
-                                           .Include(f => f.FavouriteProducts)
-                                               .ThenInclude(fp => fp.Product)
-                                                   .ThenInclude(p => p.Categories) 
-                                           .FirstOrDefaultAsync(f => f.AppUserId == userId);
+                                            .Include(f => f.FavouriteProducts)
+                                                .ThenInclude(fp => fp.Product)
+                                                    .ThenInclude(p => p.Images)
+                                            .Include(f => f.FavouriteProducts)
+                                                .ThenInclude(fp => fp.Product)
+                                                    .ThenInclude(p => p.Sizes)
+                                            .Include(f => f.FavouriteProducts)
+                                                .ThenInclude(fp => fp.Product)
+                                                    .ThenInclude(p => p.Categories)
+                                            .FirstOrDefaultAsync(f => f.AppUserId == userId);
 
             if (favourites == null || !favourites.FavouriteProducts.Any())
             {
@@ -94,13 +94,18 @@ namespace EcommerceBackend.Controllers
                 Name = fp.Product.Name,
                 Description = fp.Product.Description,
                 Price = fp.Product.Price,
-                Images = fp.Product.Images.Select(img => img.ImageUrl).ToList(), 
-                Sizes = fp.Product.Sizes.Select(s => s.Size).ToList(), 
-                Categories = fp.Product.Categories.Select(c => c.Name).ToList() 
+                Images = fp.Product.Images.Select(img => new {
+                    img.Id,
+                    img.ImageUrl,
+                    // If there are additional fields, include them here
+                }).ToList(),
+                Sizes = fp.Product.Sizes.Select(s => s.Size).ToList(),
+                Categories = fp.Product.Categories.Select(c => c.Name).ToList()
             }).ToList();
 
             return Ok(productDetails);
         }
+
 
         [HttpDelete("{productId}")]
         [Authorize]
