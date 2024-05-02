@@ -1,6 +1,7 @@
 ﻿using EcommerceBackend.Models.Cart;
 using EcommerceBackend.Models.Dtos.Reviews;
 using EcommerceBackend.Models.Entities;
+using EcommerceBackend.Models.Favourites;
 using EcommerceBackend.Models.Schemas;
 using examensarbete_backend.Models.Entities;
 using Manero_Backend.Models.Auth;
@@ -29,6 +30,8 @@ public class DatabaseContext : IdentityDbContext<AppUser>
 
     public DbSet<CartEntity> Carts { get; set; }
     public DbSet<CartItemEntity> CartItems { get; set; }
+    public DbSet<FavouriteEntity> Favourites { get; set; }
+    public DbSet<FavouriteProductEntity> FavouriteProduct { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

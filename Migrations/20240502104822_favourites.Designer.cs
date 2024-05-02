@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using examensarbete_backend.Contexts;
 
@@ -11,9 +12,11 @@ using examensarbete_backend.Contexts;
 namespace EcommerceBackend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240502104822_favourites")]
+    partial class favourites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,27 +179,6 @@ namespace EcommerceBackend.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Favourites");
-                });
-
-            modelBuilder.Entity("EcommerceBackend.Models.Favourites.FavouriteProductEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("FavouriteEntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FavouriteEntityId");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("FavouriteProduct");
                 });
 
             modelBuilder.Entity("EcommerceBackend.Models.Schemas.OrderProductSchema", b =>
@@ -627,6 +609,9 @@ namespace EcommerceBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("FavouriteEntityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -645,6 +630,8 @@ namespace EcommerceBackend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("FavouriteEntityId");
 
                     b.HasIndex("ProductGroupId");
 
@@ -723,21 +710,6 @@ namespace EcommerceBackend.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("EcommerceBackend.Models.Favourites.FavouriteProductEntity", b =>
-                {
-                    b.HasOne("EcommerceBackend.Models.Favourites.FavouriteEntity", null)
-                        .WithMany("FavouriteProducts")
-                        .HasForeignKey("FavouriteEntityId");
-
-                    b.HasOne("examensarbete_backend.Models.Entities.ProductEntity", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Manero_Backend.Models.Entities.AddressEntity", b =>
@@ -879,6 +851,10 @@ namespace EcommerceBackend.Migrations
 
             modelBuilder.Entity("examensarbete_backend.Models.Entities.ProductEntity", b =>
                 {
+                    b.HasOne("EcommerceBackend.Models.Favourites.FavouriteEntity", null)
+                        .WithMany("FavouriteProducts")
+                        .HasForeignKey("FavouriteEntityId");
+
                     b.HasOne("EcommerceBackend.Models.Entities.ProductGroupEntity", "ProductGroup")
                         .WithMany("Products")
                         .HasForeignKey("ProductGroupId")
