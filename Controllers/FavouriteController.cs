@@ -96,10 +96,13 @@ namespace EcommerceBackend.Controllers
                 Price = fp.Product.Price,
                 Images = fp.Product.Images.Select(img => new {
                     img.Id,
-                    img.ImageUrl,
-                    // If there are additional fields, include them here
+                    img.ImageUrl
+                    // Include additional fields as necessary
                 }).ToList(),
-                Sizes = fp.Product.Sizes.Select(s => s.Size).ToList(),
+                Sizes = fp.Product.Sizes.Select(s => new {
+                    s.Id,
+                    Size = s.Size // Assuming 'Size' is the field in your Size entity that contains the size label like "S", "M", "L", etc.
+                }).ToList(),
                 Categories = fp.Product.Categories.Select(c => c.Name).ToList()
             }).ToList();
 
