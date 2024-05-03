@@ -24,7 +24,7 @@ namespace examensarbete_backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDto>>> GetProducts(int page = 1, int pageSize = 10)
+        public async Task<ActionResult<List<ProductDto>>> GetProducts(int page = 1, int pageSize = 12)
         {
             int skipAmount = (page - 1) * pageSize;
 
