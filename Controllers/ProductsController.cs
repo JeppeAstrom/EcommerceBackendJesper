@@ -105,26 +105,23 @@ namespace examensarbete_backend.Controllers
         }
 
         [HttpGet("{categoryName}")]
-        public async Task<ActionResult<List<ProductDto>>> GetProductsByCategory(string categoryName, GenderEnum genderType)
+        public async Task<ActionResult<List<ProductDto>>> GetProductsByCategory(string categoryName, GenderEnum genderType, int page = 1, int pageSize = 12)
         {
-            List<ProductDto> productEntity = await _context.Products
-      .Include(p => p.Sizes)
-      .Include(p => p.Images)
-      .Include(p => p.Categories)
-      .Where(p => p.Categories.Any(c => c.Name == categoryName && c.GenderType == genderType) || p.ParentCategory == categoryName)
-      .Select(p => (ProductDto)p)
-      .ToListAsync();
+            int skipAmount = (page - 1) * pageSize;
 
+            List<ProductDto> productEntity = await _context.Products
+                .Include(p => p.Sizes)
+                .Include(p => p.Images)
+                .Include(p => p.Categories)
+                .Where(p => p.Categories.Any(c => c.Name == categoryName && c.GenderType == genderType) || p.ParentCategory == categoryName)
+                .Skip(skipAmount)
+                .Take(pageSize)
+                .Select(p => (ProductDto)p)
+                .ToListAsync();
 
             return productEntity;
         }
-        [HttpGet("/Products/ById/{productId}")]
-        public async Task<ActionResult<ProductDto>> GetProductById(Guid productId)
-        {
-            ProductDto productEntity = await _context.Products.Include(p => p.Images).Include(p => p.Sizes).Include(p => p.Categories).Where(p => p.ID == productId).Select(p => (ProductDto)p).FirstOrDefaultAsync();
 
-            return productEntity != null ? productEntity : NotFound();
-        }
 
     }
 }
