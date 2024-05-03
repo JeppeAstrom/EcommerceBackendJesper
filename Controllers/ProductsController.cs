@@ -133,6 +133,14 @@ namespace examensarbete_backend.Controllers
             return productEntity;
         }
 
+        [HttpGet("/Products/ById/{productId}")]
+        public async Task<ActionResult<ProductDto>> GetProductById(Guid productId)
+        {
+            ProductDto productEntity = await _context.Products.Include(p => p.Images).Include(p => p.Sizes).Include(p => p.Categories).Where(p => p.ID == productId).Select(p => (ProductDto)p).FirstOrDefaultAsync();
+
+            return productEntity != null ? productEntity : NotFound();
+        }
+
 
     }
 }
