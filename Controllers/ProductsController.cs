@@ -24,12 +24,23 @@ namespace examensarbete_backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDto>>> GetProducts()
+        public async Task<ActionResult<List<ProductDto>>> GetProducts(int page = 1, int pageSize = 10)
         {
-            List<ProductDto> productEntity = await _context.Products.Include(p => p.Images).Include(p => p.Sizes).Include(p => p.Categories).Select(p => (ProductDto)p).ToListAsync();
+            int skipAmount = (page - 1) * pageSize;
+
+            List<ProductDto> productEntity = await _context.Products
+                .Include(p => p.Images)
+                .Include(p => p.Sizes)
+                .Include(p => p.Categories)
+                .OrderBy(p => p.Name)
+                .Skip(skipAmount)
+                .Take(pageSize)
+                .Select(p => (ProductDto)p)
+                .ToListAsync();
 
             return productEntity;
         }
+
 
         [HttpPost]
         public async Task<ActionResult<ProductEntity>> PostProduct(ProductSchema product)
