@@ -21,7 +21,7 @@ public class ProductEntity
     public virtual List<SizeEntity> Sizes { get; set; } = new List<SizeEntity>();
     public string? Color { get; set; } = null;
     public string? ChosenSize { get; set; } = null!;
-    public int? Quantity { get; set; }
+    public int Quantity { get; set; }
     public List<CategoryEntity> Categories { get; set; } = new List<CategoryEntity>();
 
     public List<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
@@ -45,6 +45,7 @@ public class ProductEntity
             Reviews = productEntity.Reviews.Select(r => new ReviewDto
             {
             }).ToList(),
+            Quantity = productEntity.Quantity,
             genderType = productEntity.genderType,
             ParentCategory= productEntity.ParentCategory,
             chosenSize = productEntity.ChosenSize,
