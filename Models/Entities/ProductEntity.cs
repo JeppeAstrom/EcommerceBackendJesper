@@ -21,6 +21,7 @@ public class ProductEntity
     public virtual List<SizeEntity> Sizes { get; set; } = new List<SizeEntity>();
     public string? Color { get; set; } = null;
     public string? ChosenSize { get; set; } = null!;
+    public int? Quantity { get; set; }
     public List<CategoryEntity> Categories { get; set; } = new List<CategoryEntity>();
 
     public List<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
