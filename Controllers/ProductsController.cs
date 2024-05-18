@@ -10,6 +10,7 @@ using EcommerceBackend.Models.Schemas;
 using EcommerceBackend.Models.Dtos.Product;
 using examensarbete_backend.Models.Dtos.Category;
 using EcommerceBackend.Enum;
+using EcommerceBackend.Models.Dtos;
 
 namespace examensarbete_backend.Controllers
 {
@@ -24,7 +25,7 @@ namespace examensarbete_backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDto>>> GetProducts(int page = 1, int pageSize = 12)
+        public async Task<ActionResult<ProductResponseDto>> GetProducts(int page = 1, int pageSize = 12)
         {
             int skipAmount = (page - 1) * pageSize;
 
@@ -38,7 +39,15 @@ namespace examensarbete_backend.Controllers
                 .Select(p => (ProductDto)p)
                 .ToListAsync();
 
-            return productEntity;
+            int productCount = await _context.Products.CountAsync();
+
+            var response = new ProductResponseDto
+            {
+                ProductCount = productCount,
+                Products = productEntity
+            };
+
+            return Ok(response);
         }
 
 
@@ -116,7 +125,7 @@ namespace examensarbete_backend.Controllers
         }
 
         [HttpGet("{categoryName}")]
-        public async Task<ActionResult<List<ProductDto>>> GetProductsByCategory(string categoryName, GenderEnum genderType, int page = 1, int pageSize = 12)
+        public async Task<ActionResult<ProductResponseDto>> GetProductsByCategory(string categoryName, GenderEnum genderType, int page = 1, int pageSize = 12)
         {
             int skipAmount = (page - 1) * pageSize;
 
@@ -130,7 +139,17 @@ namespace examensarbete_backend.Controllers
                 .Select(p => (ProductDto)p)
                 .ToListAsync();
 
-            return productEntity;
+            int productCount = await _context.Products
+          .Include(p => p.Categories)
+          .CountAsync(p => p.Categories.Any(c => c.Name == categoryName && c.GenderType == genderType) || p.ParentCategory == categoryName);
+
+            var response = new ProductResponseDto
+            {
+                ProductCount = productCount,
+                Products = productEntity
+            };
+
+            return response;
         }
 
         [HttpGet("/Products/ById/{productId}")]
